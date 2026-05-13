@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguros JRV | Corretora de Seguros em São Paulo - Proteção Completa</title>
+    <meta name="description" content="Seguros JRV - Corretora completa em São Paulo. Seguros auto, vida, saúde, residencial e empresarial. Faça sua cotação gratuita agora!">
+    <meta name="keywords" content="seguros, corretora, São Paulo, seguro auto, seguro vida, seguro saúde, Seguros JRV">
+    <meta name="author" content="Seguros JRV">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a1628">
+
+    <!-- ===== CANONICAL URL ===== -->
+    <link rel="canonical" href="https://segurosjrv.com.br/">
+
+    <!-- ===== FAVICON ===== -->
+    <link rel="icon" type="image/jpeg" href="assets/images/logo-jrv.jpg">
+    <link rel="apple-touch-icon" href="assets/images/logo-jrv.jpg">
+
+    <!-- ===== OPEN GRAPH — Rich Preview (WhatsApp, Facebook, Telegram, LinkedIn) ===== -->
+    <!--
+        TAMANHO RECOMENDADO DA IMAGEM OG:
+        • Ideal: 1200 x 630 px  (proporção 1.91:1)
+        • Mínimo para WhatsApp: 300 x 200 px
+        • Formato: PNG ou JPG (PNG para melhor qualidade)
+        • Tamanho máximo do arquivo: < 5 MB (WhatsApp) / < 8 MB (Facebook)
+
+        IMPORTANTE: o og:image DEVE ser uma URL absoluta (https://),
+        não funciona com caminhos relativos!
+        Substitua a URL abaixo pela URL definitiva após o deploy.
+    -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Seguros JRV">
+
+    <!-- 1. TÍTULO CHAMATIVO — Aparece em negrito no preview -->
+    <meta property="og:title" content="Seguros JRV | Proteção Completa para Você e Sua Família 🛡️">
+
+    <!-- 2. DESCRIÇÃO ATRATIVA — Texto abaixo do título no preview -->
+    <meta property="og:description" content="Corretora de seguros em São Paulo com atendimento humanizado. Auto, vida, saúde, residencial e empresarial — cotação gratuita com as melhores seguradoras do Brasil. Fale conosco!">
+
+    <!-- 3. IMAGEM DE CAPA — A imagem que aparece no card do link -->
+    <!-- ⚠️ SUBSTITUA pela URL absoluta após o deploy (ex: https://segurosjrv.com.br/assets/images/og-preview.png) -->
+    <meta property="og:image" content="https://segurosjrv.com.br/assets/images/og-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="Seguros JRV — Corretora de Seguros em São Paulo">
+
+    <!-- 4. URL OFICIAL DO SITE -->
+    <meta property="og:url" content="https://segurosjrv.com.br/">
+
+    <!-- ===== TWITTER / X CARDS — Rich Preview no Twitter/X ===== -->
+    <!--
+        summary_large_image = card grande com imagem destacada (recomendado)
+        summary              = card pequeno com thumbnail lateral
+    -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Seguros JRV | Proteção Completa para Você e Sua Família 🛡️">
+    <meta name="twitter:description" content="Corretora de seguros em São Paulo. Auto, vida, saúde, residencial e empresarial — cotação gratuita com as melhores seguradoras!">
+    <meta name="twitter:image" content="https://segurosjrv.com.br/assets/images/og-preview.png">
+    <meta name="twitter:image:alt" content="Seguros JRV — Corretora de Seguros em São Paulo">
+    <!-- Se tiver perfil no X/Twitter, descomente a linha abaixo: -->
+    <!-- <meta name="twitter:site" content="@seguros_jrv"> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#inicio" class="nav-logo">
+                <img src="assets/images/logo-jrv.jpg" alt="Seguros JRV Logo" class="logo-img">
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#inicio" class="nav-link active">Início</a></li>
+                <li><a href="#servicos" class="nav-link">Serviços</a></li>
+                <li><a href="#cotacao" class="nav-link">Cotação</a></li>
+                <li><a href="#parceiros" class="nav-link">Parceiros</a></li>
+                <li><a href="#contato" class="nav-link">Contato</a></li>
+            </ul>
+            <a href="https://wa.me/5511911400184?text=Olá! Gostaria de fazer uma cotação de seguro." class="nav-cta" target="_blank">
+                <i class="fab fa-whatsapp"></i> Fale Conosco
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="inicio">
+        <div class="hero-bg-overlay"></div>
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge"><i class="fas fa-shield-halved"></i> Corretora Certificada</div>
+                <h1 class="hero-title">Proteja o que <span class="gradient-text">realmente importa</span></h1>
+                <p class="hero-subtitle">Somos especialistas em encontrar o seguro ideal para você. Auto, vida, saúde, residencial e empresarial — tudo em um só lugar, com atendimento humanizado em São Paulo.</p>
+                <div class="hero-actions">
+                    <a href="#cotacao" class="btn btn-primary"><i class="fas fa-file-signature"></i> Cotação Gratuita</a>
+                    <a href="https://wa.me/5511911400184" class="btn btn-outline" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat"><span class="stat-number" data-target="500">0</span>+ <span class="stat-label">Clientes Protegidos</span></div>
+                    <div class="stat-divider"></div>
+                    <div class="stat"><span class="stat-number" data-target="15">0</span>+ <span class="stat-label">Seguradoras Parceiras</span></div>
+                    <div class="stat-divider"></div>
+                    <div class="stat"><span class="stat-number" data-target="98">0</span>% <span class="stat-label">Satisfação</span></div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/images/familia.jpg" alt="Família protegida pela Seguros JRV">
+                <div class="hero-float-card card-1">
+                    <i class="fas fa-car"></i>
+                    <span>Auto</span>
+                </div>
+                <div class="hero-float-card card-2">
+                    <i class="fas fa-heart-pulse"></i>
+                    <span>Vida</span>
+                </div>
+                <div class="hero-float-card card-3">
+                    <i class="fas fa-house-chimney"></i>
+                    <span>Residencial</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <a href="#servicos"><i class="fas fa-chevron-down"></i></a>
+        </div>
+    </section>
+
+    <!-- ===== SERVIÇOS ===== -->
+    <section class="services" id="servicos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nossos Serviços</span>
+                <h2 class="section-title">Soluções completas em <span class="gradient-text">seguros</span></h2>
+                <p class="section-desc">Oferecemos proteção personalizada para cada momento da sua vida.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up">
+                    <div class="service-icon"><i class="fas fa-car-side"></i></div>
+                    <h3>Seguro Auto</h3>
+                    <p>Proteção completa para seu veículo contra roubo, furto, colisão e danos a terceiros.</p>
+                    <a href="#cotacao" class="service-link">Cotar agora <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-delay="100">
+                    <div class="service-icon"><i class="fas fa-heart-pulse"></i></div>
+                    <h3>Seguro Vida</h3>
+                    <p>Garanta a segurança financeira da sua família com coberturas flexíveis e acessíveis.</p>
+                    <a href="#cotacao" class="service-link">Cotar agora <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-delay="200">
+                    <div class="service-icon"><i class="fas fa-hospital"></i></div>
+                    <h3>Seguro Saúde</h3>
+                    <p>Planos de saúde com as melhores coberturas e rede credenciada do mercado.</p>
+                    <a href="#cotacao" class="service-link">Cotar agora <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-delay="300">
+                    <div class="service-icon"><i class="fas fa-house-chimney-crack"></i></div>
+                    <h3>Seguro Residencial</h3>
+                    <p>Proteção para seu lar contra incêndios, roubos, desastres naturais e muito mais.</p>
+                    <a href="#cotacao" class="service-link">Cotar agora <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-delay="400">
+                    <div class="service-icon"><i class="fas fa-building"></i></div>
+                    <h3>Seguro Empresarial</h3>
+                    <p>Soluções corporativas completas para proteger seu negócio e seus colaboradores.</p>
+                    <a href="#cotacao" class="service-link">Cotar agora <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-delay="500">
+                    <div class="service-icon"><i class="fas fa-plane"></i></div>
+                    <h3>Seguro Viagem</h3>
+                    <p>Viaje tranquilo com cobertura médica, extravio de bagagem e assistência 24h.</p>
+                    <a href="#cotacao" class="service-link">Cotar agora <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COTAÇÃO ===== -->
+    <section class="quote-section" id="cotacao">
+        <div class="container">
+            <div class="quote-wrapper">
+                <div class="quote-info">
+                    <span class="section-tag">Cotação Rápida</span>
+                    <h2 class="section-title">Faça sua cotação <span class="gradient-text">gratuita</span></h2>
+                    <p>Preencha o formulário e receba as melhores ofertas das maiores seguradoras do Brasil. Sem compromisso!</p>
+                    <div class="quote-benefits">
+                        <div class="benefit"><i class="fas fa-check-circle"></i> Resposta em até 24h</div>
+                        <div class="benefit"><i class="fas fa-check-circle"></i> Sem compromisso</div>
+                        <div class="benefit"><i class="fas fa-check-circle"></i> Melhores preços do mercado</div>
+                        <div class="benefit"><i class="fas fa-check-circle"></i> Atendimento personalizado</div>
+                    </div>
+                </div>
+                <div class="quote-form-container">
+                    <form class="quote-form" id="quoteForm">
+                        <h3><i class="fas fa-shield-halved"></i> Solicite sua Cotação</h3>
+                        <div class="form-group">
+                            <label for="nome"><i class="fas fa-user"></i> Nome Completo</label>
+                            <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone"><i class="fas fa-phone"></i> Telefone / WhatsApp</label>
+                            <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope"></i> E-mail</label>
+                            <input type="email" id="email" name="email" placeholder="seu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="tipoSeguro"><i class="fas fa-shield-halved"></i> Tipo de Seguro</label>
+                            <select id="tipoSeguro" name="tipoSeguro" required>
+                                <option value="" disabled selected>Selecione o tipo de seguro</option>
+                                <option value="auto">🚗 Seguro Auto</option>
+                                <option value="vida">❤️ Seguro Vida</option>
+                                <option value="saude">🏥 Seguro Saúde</option>
+                                <option value="residencial">🏠 Seguro Residencial</option>
+                                <option value="empresarial">🏢 Seguro Empresarial</option>
+                                <option value="viagem">✈️ Seguro Viagem</option>
+                                <option value="outro">📋 Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagem"><i class="fas fa-comment"></i> Mensagem (opcional)</label>
+                            <textarea id="mensagem" name="mensagem" rows="3" placeholder="Conte-nos mais sobre o que precisa..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i> Enviar Cotação
+                        </button>
+                    </form>
+                    <div class="form-success" id="formSuccess">
+                        <div class="success-icon"><i class="fab fa-whatsapp"></i></div>
+                        <h3>Cotação Enviada via WhatsApp!</h3>
+                        <p>Seus dados foram enviados para nosso WhatsApp. Se a janela não abriu automaticamente, clique abaixo:</p>
+                        <a id="whatsappFallback" href="https://wa.me/5511911400184?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20cota%C3%A7%C3%A3o%20de%20seguro." class="btn btn-primary" target="_blank" style="margin-bottom: 12px;"><i class="fab fa-whatsapp"></i> Abrir WhatsApp</a>
+                        <button class="btn btn-outline" onclick="resetForm()">Nova Cotação</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PARCEIROS ===== -->
+    <section class="partners" id="parceiros">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Nossas Seguradoras</span>
+                <h2 class="section-title">Parceiros de <span class="gradient-text">confiança</span></h2>
+                <p class="section-desc">Trabalhamos com as maiores e mais respeitadas seguradoras do Brasil.</p>
+            </div>
+            <!--
+                ===== DADOS DE SINISTRALIDADE — FONTES E REFERÊNCIAS =====
+                Os dados abaixo referem-se ao exercício de 2024 (ano completo ou 4T24).
+                A "sinistralidade" mede a % dos prêmios arrecadados que foi destinada
+                ao pagamento de sinistros (quanto maior, mais a seguradora paga).
+
+                FONTES:
+                [1] Porto Seguro 4T24 — portaldividendos.com.br / portoseguro.com.br (RI)
+                [2] Suhai — suhaiseguradora.com / Relatório SUSEP 2024
+                [3] SulAmérica — neofeed.com.br / legismap.com.br (resultados 2024)
+                [4] Allianz — allianz.com.br (Relatório de Sustentabilidade 2024)
+                [5] Bradesco Seguros — bradescoseguros.com.br (Earnings Release 2024)
+                [6] Tokio Marine — revistacobertura.com.br / moodyslocal.com.br
+                [7] Liberty/HDI — hdi.global (Annual Report 2024) / sonhoseguro.com.br
+                [8] Setor geral — SUSEP (susep.gov.br) / feebpr.org.br / monitormercantil.com.br
+            -->
+            <div class="partners-track">
+                <div class="partner-card" data-sinistro="56.5" data-segmento="Auto (4T24)" data-fonte="Fonte: Porto Seguro RI — portoseguro.com.br" data-detalhe="Sinistralidade Saúde: 75.1%. Referência 4T24.">
+                    <img src="imgseguro/PortoSeguro.jpeg" alt="Porto Seguro" class="partner-logo-img" width="90" height="50">
+                    <span>Porto Seguro</span>
+                    <div class="partner-tooltip"></div>
+                </div>
+                <div class="partner-card" data-sinistro="48.2" data-segmento="Roubo/Furto (2024)" data-fonte="Fonte: SUSEP / suhaiseguradora.com" data-detalhe="Especializada em proteção veicular contra roubo e furto.">
+                    <img src="imgseguro/Suhai.jpeg" alt="Suhai Seguradora" class="partner-logo-img" width="90" height="50">
+                    <span>Suhai</span>
+                    <div class="partner-tooltip"></div>
+                </div>
+                <div class="partner-card" data-sinistro="79.5" data-segmento="Saúde/Odonto (2024)" data-fonte="Fonte: neofeed.com.br / SulAmérica RI" data-detalhe="Queda de 7.8 p.p. em relação a 2023. Foco em combate a fraudes.">
+                    <img src="imgseguro/SulAmerica.jpeg" alt="SulAmérica Seguros" class="partner-logo-img" width="90" height="50">
+                    <span>SulAmérica</span>
+                    <div class="partner-tooltip"></div>
+                </div>
+                <div class="partner-card" data-sinistro="69.3" data-segmento="Patrimonial (2024)" data-fonte="Fonte: allianz.com.br / Relatório Global" data-detalhe="Queda de 4.9 p.p. no Brasil vs 2023. Subscrição eficiente.">
+                    <img src="imgseguro/Allianz.jpeg" alt="Allianz Seguros" class="partner-logo-img" width="90" height="50">
+                    <span>Allianz</span>
+                    <div class="partner-tooltip"></div>
+                </div>
+                <div class="partner-card" data-sinistro="90.6" data-segmento="Saúde Consolidado (2024)" data-fonte="Fonte: bradescoseguros.com.br (RI)" data-detalhe="Redução de 4.6 p.p. vs 2023. Lucro recorde de R$9.1 bi.">
+                    <img src="imgseguro/Bradesco.jpeg" alt="Bradesco Seguros" class="partner-logo-img" width="90" height="50">
+                    <span>Bradesco</span>
+                    <div class="partner-tooltip"></div>
+                </div>
+                <div class="partner-card" data-sinistro="52.8" data-segmento="Auto/Patrimonial (2024)" data-fonte="Fonte: revistacobertura.com.br / Moody's" data-detalhe="Resultado estável. Crescimento de 12% em prêmios emitidos.">
+                    <img src="imgseguro/TokioMarine.jpeg" alt="Tokio Marine" class="partner-logo-img" width="90" height="50">
+                    <span>Tokio Marine</span>
+                    <div class="partner-tooltip"></div>
+                </div>
+                <div class="partner-card" data-sinistro="53.5" data-segmento="Combinado Global (2024)" data-fonte="Fonte: hdi.global (Annual Report 2024)" data-detalhe="Taxa combinada de 90.0%. Impacto das enchentes no RS no 1S24.">
+                    <img src="imgseguro/HdiSeguros.jpeg" alt="HDI Seguros" class="partner-logo-img" width="90" height="50">
+                    <span>HDI</span>
+                    <div class="partner-tooltip"></div>
+                </div>
+                <div class="partner-card" data-sinistro="82.4" data-segmento="Saúde (2024)" data-fonte="Fonte: ANS / amil.com.br" data-detalhe="Uma das maiores operadoras de saúde do Brasil. Grupo UnitedHealth.">
+                    <img src="imgseguro/AmilSeguros.jpeg" alt="Amil Seguros" class="partner-logo-img" width="90" height="50">
+                    <span>Amil</span>
+                    <div class="partner-tooltip"></div>
+                </div>
+                <div class="partner-card" data-sinistro="58.7" data-segmento="Auto/Patrimonial (2024)" data-fonte="Fonte: SUSEP / yelumseguradora.com.br" data-detalhe="Marca do Grupo Bradesco Seguros para seguros massificados.">
+                    <img src="imgseguro/YelumSeguradora.jpeg" alt="Yelum Seguros" class="partner-logo-img" width="90" height="50">
+                    <span>Yelum</span>
+                    <div class="partner-tooltip"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DEPOIMENTOS ===== -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Depoimentos</span>
+                <h2 class="section-title">O que nossos clientes <span class="gradient-text">dizem</span></h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Atendimento excepcional! Conseguiram o melhor preço do mercado para meu seguro auto. Super recomendo!"</p>
+                    <div class="testimonial-author"><div class="author-avatar">MR</div><div><strong>Marcos R.</strong><span>Seguro Auto</span></div></div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Profissionais dedicados e transparentes. Fizeram toda a diferença na hora de escolher o seguro da minha família."</p>
+                    <div class="testimonial-author"><div class="author-avatar">AS</div><div><strong>Ana S.</strong><span>Seguro Vida</span></div></div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Rapidez na cotação e no sinistro. A JRV me ajudou em um momento difícil com muita eficiência e empatia."</p>
+                    <div class="testimonial-author"><div class="author-avatar">CF</div><div><strong>Carlos F.</strong><span>Seguro Residencial</span></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTATO ===== -->
+    <section class="contact" id="contato">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Contato</span>
+                <h2 class="section-title">Fale com a <span class="gradient-text">Seguros JRV</span></h2>
+            </div>
+            <div class="contact-grid">
+                <a href="https://wa.me/5511911400184" class="contact-card" target="_blank">
+                    <div class="contact-icon whatsapp"><i class="fab fa-whatsapp"></i></div>
+                    <h3>WhatsApp</h3>
+                    <p>(11) 91140-0184</p>
+                </a>
+                <a href="tel:+5511911400184" class="contact-card">
+                    <div class="contact-icon phone"><i class="fas fa-phone"></i></div>
+                    <h3>Telefone</h3>
+                    <p>(11) 91140-0184</p>
+                </a>
+                <a href="mailto:corretoradesegurosjrv@gmail.com" class="contact-card">
+                    <div class="contact-icon email"><i class="fas fa-envelope"></i></div>
+                    <h3>E-mail</h3>
+                    <p>corretoradesegurosjrv@gmail.com</p>
+                </a>
+                <a href="https://instagram.com/seguros_jrv" class="contact-card" target="_blank">
+                    <div class="contact-icon instagram"><i class="fab fa-instagram"></i></div>
+                    <h3>Instagram</h3>
+                    <p>@seguros_jrv</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/images/logo-jrv.jpg" alt="Seguros JRV" class="footer-logo">
+                    <p>Sua segurança é nossa prioridade. Corretora de seguros completa em São Paulo, SP.</p>
+                    <div class="footer-social">
+                        <a href="https://instagram.com/seguros_jrv" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/5511911400184" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="mailto:corretoradesegurosjrv@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Links Rápidos</h4>
+                    <a href="#inicio">Início</a>
+                    <a href="#servicos">Serviços</a>
+                    <a href="#cotacao">Cotação</a>
+                    <a href="#parceiros">Parceiros</a>
+                    <a href="#contato">Contato</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Seguros</h4>
+                    <a href="#cotacao">Seguro Auto</a>
+                    <a href="#cotacao">Seguro Vida</a>
+                    <a href="#cotacao">Seguro Saúde</a>
+                    <a href="#cotacao">Seguro Residencial</a>
+                    <a href="#cotacao">Seguro Empresarial</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contato</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> São Paulo, SP</p>
+                    <p><i class="fas fa-phone"></i> (11) 91140-0184</p>
+                    <p><i class="fas fa-envelope"></i> corretoradesegurosjrv@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Seguros JRV — Todos os direitos reservados. | SUSEP Nº XXXXX</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== CHATBOT ===== -->
+    <div class="chatbot" id="chatbot">
+        <button class="chatbot-toggle" id="chatbotToggle" aria-label="Assistente Virtual">
+            <i class="fas fa-robot"></i>
+            <span class="chatbot-pulse"></span>
+        </button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-header-info">
+                    <div class="chatbot-avatar"><i class="fas fa-robot"></i></div>
+                    <div><strong>Assistente JRV</strong><span class="chatbot-status">Online</span></div>
+                </div>
+                <button class="chatbot-close" id="chatbotClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chat-msg bot">
+                    <p>Olá! 👋 Sou o assistente virtual da Seguros JRV. Como posso ajudar?</p>
+                </div>
+                <div class="chat-options" id="chatOptions">
+                    <button class="chat-option-btn" data-response="auto">🚗 Seguro Auto</button>
+                    <button class="chat-option-btn" data-response="vida">❤️ Seguro Vida</button>
+                    <button class="chat-option-btn" data-response="saude">🏥 Seguro Saúde</button>
+                    <button class="chat-option-btn" data-response="falar">💬 Falar com corretor</button>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" placeholder="Digite sua mensagem...">
+                <button id="chatSend"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== WHATSAPP FLOAT ===== -->
+    <a href="https://wa.me/5511911400184?text=Olá! Gostaria de saber mais sobre seguros." class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>
