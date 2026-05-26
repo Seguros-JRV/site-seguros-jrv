@@ -239,6 +239,12 @@ img.partner-logo-img { width: 90px; height: 50px; max-width: 90px; max-height: 5
 .nav-overlay.active { display: block; opacity: 1; }
 .body-menu-open { overflow: hidden; }
 
+/* ===== GLOBAL TOUCH IMPROVEMENTS ===== */
+*, *::before, *::after { -webkit-tap-highlight-color: transparent; }
+button, a, [role="button"], .btn, .nav-link, .nav-toggle, .chat-option-btn,
+.chatbot-toggle, .chatbot-close, .partner-card, .contact-card, .service-card { touch-action: manipulation; }
+.form-group input, .form-group select, .form-group textarea, .chatbot-input input { font-size: max(16px, 0.95rem); }
+
 /* ===== PREFERS REDUCED MOTION ===== */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
@@ -261,51 +267,105 @@ img.partner-logo-img { width: 90px; height: 50px; max-width: 90px; max-height: 5
     .contact-grid { grid-template-columns: 1fr 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
 }
+
 @media (max-width: 768px) {
-    .nav-menu { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: rgba(6,14,26,0.98); backdrop-filter: blur(20px); flex-direction: column; padding: 100px 40px 40px; transition: right 0.4s ease; z-index: 1001; }
+    /* Navbar */
+    .nav-menu { position: fixed; top: 0; right: -100%; width: 82%; max-width: 320px; height: 100vh; height: 100dvh; background: rgba(6,14,26,0.98); backdrop-filter: blur(20px); flex-direction: column; padding: 88px 32px 40px; gap: 4px; transition: right 0.4s cubic-bezier(0.4,0,0.2,1); z-index: 1001; overflow-y: auto; }
     .nav-menu.active { right: 0; }
+    .nav-link { padding: 14px 20px; font-size: 1rem; border-radius: var(--radius-sm); }
     .mobile-cta-item { display: list-item; }
-    .nav-cta.mobile-cta { display: inline-flex; margin-top: 20px; }
-    .nav-toggle { display: flex; padding: 12px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+    .nav-cta:not(.mobile-cta) { display: none; }
+    .nav-cta.mobile-cta { display: inline-flex; margin-top: 20px; width: 100%; justify-content: center; }
+    .nav-toggle { display: flex; padding: 8px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
     .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .nav-toggle.active span:nth-child(2) { opacity: 0; }
     .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-    .services-grid { grid-template-columns: 1fr; }
-    .testimonials-grid { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr; text-align: center; }
-    .footer-social { justify-content: center; }
-    .footer-contact p { justify-content: center; }
-    .chatbot-window { width: calc(100vw - 32px); right: -8px; max-height: calc(100dvh - 140px); }
-    .chatbot-messages { max-height: calc(100dvh - 280px); }
-    .chatbot-close { padding: 12px; min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
-    .hero-stats { flex-direction: column; gap: 16px; }
-    .stat-divider { width: 40px; height: 1px; }
-    .chat-option-btn { padding: 12px 20px; font-size: 0.85rem; }
-    .footer-links a { padding: 10px 0; }
+
+    /* Hero */
+    .hero { min-height: 100svh; padding-top: 72px; }
+    .hero-stats { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 16px 20px; }
+    .stat-divider { width: 1px; height: 32px; }
+    .hero-image { max-width: 360px; }
+
+    /* Services */
+    .services-grid { grid-template-columns: 1fr; gap: 16px; }
+    .service-card { padding: 28px 24px; }
     .service-link { padding: 8px 0; display: inline-flex; }
-    .contact-card p { word-break: break-word; }
-    .footer-contact p { word-break: break-word; }
+
+    /* Quote */
+    .quote-benefits { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 12px; }
+    .benefit { font-size: 0.92rem; }
+    .quote-form { padding: 28px 24px; }
+    .form-group input, .form-group select, .form-group textarea { padding: 13px 16px; }
+
+    /* Partners */
+    .partners-track { gap: 12px; }
+    .partner-card { width: calc(50% - 6px); height: auto; min-height: 110px; }
     .partner-tooltip { position: fixed; bottom: auto; top: 50%; left: 50% !important; transform: translate(-50%, -50%) !important; width: calc(100vw - 48px); max-width: 320px; z-index: 1000; }
     .partner-tooltip::after { display: none; }
+
+    /* Testimonials */
+    .testimonials-grid { grid-template-columns: 1fr; }
+
+    /* Contact — 2×2 grid */
+    .contact-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .contact-card { padding: 28px 16px; }
+    .contact-card p { word-break: break-word; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr; text-align: center; }
+    .footer-social { justify-content: center; }
+    .footer-contact p { justify-content: center; word-break: break-word; }
+    .footer-links a { padding: 10px 0; }
+
+    /* Chatbot — no overflow */
+    .chatbot { bottom: 20px; right: 20px; }
+    .chatbot-window { width: min(370px, calc(100vw - 40px)); right: 0; max-height: calc(100dvh - 150px); }
+    .chatbot-messages { max-height: calc(100dvh - 290px); }
+    .chatbot-close { padding: 12px; min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    .chat-option-btn { padding: 12px 20px; font-size: 0.85rem; }
+
+    /* WhatsApp float */
+    .whatsapp-float { bottom: 94px; right: 20px; }
 }
 
 @media (max-width: 480px) {
     .container { padding: 0 16px; }
-    .hero-title { font-size: clamp(2rem, 6vw, 2.5rem); }
-    .hero { min-height: auto; padding: 100px 0 60px; }
+    .hero { padding-top: 68px; }
+    .hero-title { font-size: clamp(1.9rem, 6vw, 2.4rem); }
     .hero-image { max-width: 100%; }
     .hero-image img { border-radius: var(--radius-sm); }
+    .hero-actions .btn { width: 100%; justify-content: center; }
+    .hero-stats { gap: 12px 16px; }
+    .stat-number { font-size: 1.6rem; }
+    .services { padding: 64px 0; }
+    .quote-section { padding: 64px 0; }
     .quote-form { padding: 24px 20px; }
     .form-success { padding: 32px 20px; }
-    .services { padding: 60px 0; }
-    .testimonials { padding: 60px 0; }
-    .contact { padding: 60px 0; }
-    .partners { padding: 60px 0; }
+    .quote-benefits { grid-template-columns: 1fr; }
+    .partners { padding: 56px 0; }
+    .testimonials { padding: 64px 0; }
+    .contact { padding: 64px 0; }
     .section-header { margin-bottom: 36px; }
-    .partners-track { gap: 12px; }
-    .partner-card { width: calc(50% - 6px); height: auto; min-height: 110px; }
-    .hero-actions .btn { width: 100%; justify-content: center; }
-    .quote-section { padding: 60px 0; }
     .footer { padding: 40px 0 0; }
+    .btn { padding: 13px 26px; font-size: 0.95rem; }
+    .chatbot-toggle { width: 54px; height: 54px; font-size: 1.3rem; }
+    .whatsapp-float { width: 50px; height: 50px; font-size: 1.6rem; bottom: 88px; }
+}
+
+@media (max-width: 375px) {
+    .container { padding: 0 14px; }
+    .hero-title { font-size: clamp(1.7rem, 7vw, 2rem); }
+    .hero-badge { font-size: 0.78rem; padding: 6px 14px; }
+    .nav-menu { padding: 80px 24px 32px; }
+    .nav-link { font-size: 0.95rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-card { padding: 24px 14px; }
+    .section-title { font-size: clamp(1.6rem, 5.5vw, 2rem); }
+    .stat-number { font-size: 1.5rem; }
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .chatbot { bottom: max(20px, calc(env(safe-area-inset-bottom) + 16px)); }
+    .whatsapp-float { bottom: max(94px, calc(env(safe-area-inset-bottom) + 88px)); }
 }

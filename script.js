@@ -441,7 +441,7 @@ if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
 
 // ===== PARALLAX SUTIL NO HERO =====
 const heroImage = document.querySelector('.hero-image');
-if (heroImage && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if (heroImage && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && window.innerWidth > 768) {
     window.addEventListener('scroll', () => {
         const scrollY = window.pageYOffset;
         if (scrollY < window.innerHeight) {
