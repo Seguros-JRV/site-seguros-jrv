@@ -346,7 +346,7 @@ function restoreChatState() {
 }
 restoreChatState();
 
-// ===== PARTICLES =====
+// ===== PARTICLES (otimizado: pause fora da tela + menos partículas no mobile) =====
 const canvas = document.getElementById('particles');
 if (canvas) {
     const container = canvas.parentElement;
@@ -355,20 +355,27 @@ if (canvas) {
     canvas.appendChild(cvs);
     const ctx = cvs.getContext('2d');
     let particles = [];
+    let particlesActive = true;
+
     function resizeCanvas() {
         cvs.width = container.offsetWidth;
         cvs.height = container.offsetHeight;
     }
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    for (let i = 0; i < 40; i++) {
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+
+    // Menos partículas no mobile → melhor performance
+    const particleCount = window.innerWidth <= 768 ? 18 : 38;
+    for (let i = 0; i < particleCount; i++) {
         particles.push({
             x: Math.random() * cvs.width, y: Math.random() * cvs.height,
             size: Math.random() * 2 + 0.5, speedX: (Math.random() - 0.5) * 0.4,
             speedY: (Math.random() - 0.5) * 0.4, opacity: Math.random() * 0.4 + 0.1
         });
     }
+
     function drawParticles() {
+        if (!particlesActive) return; // Pause quando hero fora do viewport
         ctx.clearRect(0, 0, cvs.width, cvs.height);
         particles.forEach(p => {
             ctx.beginPath();
@@ -381,6 +388,17 @@ if (canvas) {
         });
         requestAnimationFrame(drawParticles);
     }
+
+    // Pausa o loop quando a seção hero sai do viewport
+    const heroSection = document.getElementById('inicio');
+    if (heroSection && 'IntersectionObserver' in window) {
+        new IntersectionObserver(([entry]) => {
+            const wasActive = particlesActive;
+            particlesActive = entry.isIntersecting;
+            if (particlesActive && !wasActive) drawParticles(); // Retoma loop
+        }, { threshold: 0 }).observe(heroSection);
+    }
+
     drawParticles();
 }
 

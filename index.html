@@ -77,10 +77,11 @@
     <link rel="preload" href="assets/images/familia.jpg" as="image" fetchpriority="high">
     <link rel="preload" href="style.css" as="style">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 
@@ -231,7 +232,7 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="assets/images/familia.jpg" alt="Família protegida pela Seguros JRV" width="600" height="400" fetchpriority="high">
+                    <img src="assets/images/familia.jpg" alt="Família protegida pela Seguros JRV" width="600" height="400" fetchpriority="high" decoding="async">
                     <div class="hero-float-card card-1">
                         <i class="fas fa-car"></i>
                         <span>Auto</span>
@@ -438,7 +439,7 @@
         </section>
 
         <!-- ===== DEPOIMENTOS ===== -->
-        <section class="testimonials">
+        <section class="testimonials" id="depoimentos">
             <div class="container">
                 <div class="section-header">
                     <span class="section-tag">Depoimentos</span>
@@ -503,7 +504,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <img src="assets/images/logo-jrv.jpg" alt="Seguros JRV" class="footer-logo" width="150" height="45" loading="lazy">
+                    <img src="assets/images/logo-jrv.jpg" alt="Seguros JRV" class="footer-logo" width="150" height="45" loading="lazy" decoding="async">
                     <p>Sua segurança é nossa prioridade. Corretora de seguros completa em São Paulo, SP.</p>
                     <div class="footer-social">
                         <a href="https://instagram.com/seguros_jrv" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Seguros JRV"><i class="fab fa-instagram"></i></a>
@@ -517,6 +518,7 @@
                     <a href="#servicos">Serviços</a>
                     <a href="#cotacao">Cotação</a>
                     <a href="#parceiros">Parceiros</a>
+                    <a href="#depoimentos">Depoimentos</a>
                     <a href="#contato">Contato</a>
                 </div>
                 <div class="footer-links">
@@ -578,7 +580,7 @@
     </aside>
 
     <!-- ===== WHATSAPP FLOAT ===== -->
-    <a href="https://wa.me/5511911400184?text=Olá! Gostaria de saber mais sobre seguros." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <a href="https://wa.me/5511911400184?text=Olá! Gostaria de saber mais sobre seguros." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp - (11) 91140-0184">
         <i class="fab fa-whatsapp"></i>
     </a>
 

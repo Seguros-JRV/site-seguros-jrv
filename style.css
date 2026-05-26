@@ -53,7 +53,7 @@ a { text-decoration: none; color: inherit; }
 .hero-particles { position: absolute; inset: 0; }
 .hero-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
 .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(212,160,23,0.15); border: 1px solid rgba(212,160,23,0.3); border-radius: 50px; font-size: 0.85rem; color: var(--accent); font-weight: 600; margin-bottom: 20px; animation: fadeInUp 0.8s ease; }
-.hero-title { font-family: 'Outfit', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px; animation: fadeInUp 0.8s ease 0.2s both; }
+.hero-title { font-family: 'Outfit', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 20px; animation: fadeInUp 0.8s ease 0.2s both; }
 .hero-subtitle { font-size: 1.1rem; color: var(--text-muted); max-width: 520px; margin-bottom: 32px; animation: fadeInUp 0.8s ease 0.4s both; }
 .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; animation: fadeInUp 0.8s ease 0.6s both; }
 .hero-stats { display: flex; align-items: center; gap: 24px; animation: fadeInUp 0.8s ease 0.8s both; }
@@ -74,7 +74,7 @@ a { text-decoration: none; color: inherit; }
 /* ===== SECTIONS SHARED ===== */
 .section-header { text-align: center; margin-bottom: 60px; }
 .section-tag { display: inline-block; padding: 6px 18px; background: rgba(212,160,23,0.12); border: 1px solid rgba(212,160,23,0.25); border-radius: 50px; font-size: 0.85rem; color: var(--accent); font-weight: 600; margin-bottom: 16px; }
-.section-title { font-family: 'Outfit', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 12px; }
+.section-title { font-family: 'Outfit', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -0.015em; margin-bottom: 12px; }
 .section-desc { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
 
 /* ===== SERVICES ===== */
@@ -238,6 +238,47 @@ img.partner-logo-img { width: 90px; height: 50px; max-width: 90px; max-height: 5
 .nav-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 999; opacity: 0; transition: opacity 0.4s ease; }
 .nav-overlay.active { display: block; opacity: 1; }
 .body-menu-open { overflow: hidden; }
+
+/* ===== PREMIUM UX ENHANCEMENTS ===== */
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: rgba(212,160,23,0.4); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Seleção de texto */
+::selection { background: rgba(212,160,23,0.2); color: var(--text); }
+::-moz-selection { background: rgba(212,160,23,0.2); color: var(--text); }
+
+/* Focus para teclado — sem remover para mouse/touch */
+*:focus:not(:focus-visible) { outline: none; }
+*:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.btn:focus-visible { outline-offset: 5px; }
+.nav-link:focus-visible { outline-offset: 0; border-radius: var(--radius-sm); }
+.service-link:focus-visible, .contact-card:focus-visible { outline-offset: 4px; }
+
+/* Active press (feedback táctil nos botões) */
+.btn:active { transform: scale(0.96) !important; transition-duration: 0.08s !important; }
+.btn-primary:active { box-shadow: 0 2px 10px rgba(34,197,94,0.25) !important; }
+.nav-cta:active { transform: scale(0.96) !important; transition-duration: 0.08s !important; }
+.contact-card:active { transform: translateY(-2px) scale(0.99) !important; }
+
+/* Service card: inset accent dourado no hover */
+.service-card:hover { box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 30px rgba(212,160,23,0.1), inset 0 2px 0 var(--accent); }
+
+/* Service link pill (desktop) */
+@media (min-width: 769px) {
+    .service-link { background: rgba(212,160,23,0.08); border: 1px solid rgba(212,160,23,0.2); border-radius: 50px; padding: 7px 16px; transition: all 0.3s ease; }
+    .service-link:hover { background: rgba(212,160,23,0.16); border-color: rgba(212,160,23,0.5); gap: 10px; box-shadow: 0 4px 14px rgba(212,160,23,0.18); }
+}
+
+/* Validação visual dos campos do formulário */
+.form-group input:user-invalid,
+.form-group select:user-invalid { border-color: rgba(239,68,68,0.55) !important; background: rgba(239,68,68,0.04) !important; }
+
+/* Chatbot toggle: efeito ao fechar */
+.chatbot-toggle:active { transform: scale(0.93) !important; }
 
 /* ===== GLOBAL TOUCH IMPROVEMENTS ===== */
 *, *::before, *::after { -webkit-tap-highlight-color: transparent; }
