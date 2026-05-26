@@ -106,11 +106,6 @@ a { text-decoration: none; color: inherit; }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); background: rgba(212,160,23,0.05); box-shadow: 0 0 0 3px rgba(212,160,23,0.1); }
 .form-group select option { background: var(--primary); color: var(--text); }
 .form-group textarea { resize: vertical; min-height: 80px; }
-.form-success { display: none; text-align: center; padding: 60px 36px; background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: var(--radius); }
-.form-success.active { display: block; }
-.success-icon { font-size: 4rem; color: var(--green); margin-bottom: 20px; }
-.form-success h3 { font-family: 'Outfit', sans-serif; font-size: 1.8rem; margin-bottom: 12px; color: var(--accent); }
-.form-success p { color: var(--text-muted); margin-bottom: 24px; }
 
 /* ===== PARTNERS ===== */
 .partners { padding: 80px 0; background: var(--bg-dark); }
@@ -233,6 +228,205 @@ img.partner-logo-img { width: 90px; height: 50px; max-width: 90px; max-height: 5
 /* ===== SKIP TO CONTENT ===== */
 .skip-to-content { position: absolute; top: -100%; left: 16px; padding: 12px 24px; background: var(--accent); color: var(--primary); font-weight: 700; border-radius: 0 0 var(--radius-sm) var(--radius-sm); z-index: 10000; transition: top 0.3s ease; }
 .skip-to-content:focus { top: 0; }
+
+/* ===== MODAL DE SUCESSO — Confirmação de envio ===== */
+
+/* Overlay (backdrop blur) */
+.success-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(6, 14, 26, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.success-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Modal card */
+.success-modal {
+    position: relative;
+    background: linear-gradient(155deg, rgba(13,32,64,0.99) 0%, rgba(8,18,34,0.99) 100%);
+    border: 1px solid rgba(212,160,23,0.22);
+    border-radius: 24px;
+    padding: 52px 40px 40px;
+    max-width: 460px;
+    width: 100%;
+    text-align: center;
+    box-shadow:
+        0 40px 80px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(255,255,255,0.04),
+        inset 0 1px 0 rgba(255,255,255,0.07);
+    transform: translateY(28px) scale(0.96);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.success-overlay.active .success-modal {
+    transform: translateY(0) scale(1);
+}
+
+/* Botão fechar */
+.success-close-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.82rem;
+    transition: background 0.2s, color 0.2s, transform 0.25s;
+    flex-shrink: 0;
+}
+.success-close-btn:hover {
+    background: rgba(255,255,255,0.13);
+    color: var(--text);
+    transform: rotate(90deg);
+}
+.success-close-btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* Checkmark SVG animado */
+.success-icon-wrap {
+    margin-bottom: 22px;
+}
+.success-checkmark {
+    width: 76px;
+    height: 76px;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 0 18px rgba(34,197,94,0.28));
+}
+.success-checkmark__circle {
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 157;
+    stroke-dashoffset: 157;
+    fill: none;
+    animation: sc-circle 0.65s cubic-bezier(0.65, 0, 0.45, 1) 0.12s forwards;
+}
+.success-checkmark__check {
+    stroke: var(--green);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 42;
+    stroke-dashoffset: 42;
+    fill: none;
+    animation: sc-check 0.38s cubic-bezier(0.65, 0, 0.45, 1) 0.72s forwards;
+}
+@keyframes sc-circle { to { stroke-dashoffset: 0; } }
+@keyframes sc-check  { to { stroke-dashoffset: 0; } }
+
+/* Título e subtítulo */
+.success-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+}
+.success-subtitle {
+    color: var(--text-muted);
+    font-size: 0.98rem;
+    line-height: 1.65;
+    margin-bottom: 22px;
+}
+.success-subtitle strong {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* Card de dados do lead */
+.success-lead-card {
+    background: rgba(212,160,23,0.055);
+    border: 1px solid rgba(212,160,23,0.15);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    text-align: left;
+}
+.success-lead-card strong { color: var(--text); font-weight: 500; }
+.success-lead-row { display: flex; align-items: center; gap: 9px; }
+.success-lead-row + .success-lead-row { margin-top: 5px; }
+.success-lead-icon { font-size: 0.8rem; color: var(--accent); flex-shrink: 0; }
+
+/* Ações */
+.success-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.success-wa-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 13px 28px;
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.93rem;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.28);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.success-wa-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(37,211,102,0.42);
+    color: #fff;
+}
+.success-wa-btn:active { transform: scale(0.97); }
+.success-new-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.86rem;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    transition: color 0.2s, background 0.2s;
+    margin: 0 auto;
+}
+.success-new-btn:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+
+/* Mobile */
+@media (max-width: 480px) {
+    .success-modal { padding: 46px 22px 32px; border-radius: 20px; }
+    .success-title { font-size: 1.22rem; }
+    .success-subtitle { font-size: 0.9rem; }
+    .success-checkmark { width: 64px; height: 64px; }
+    .success-br { display: none; }
+}
 
 /* ===== MOBILE OVERLAY ===== */
 .nav-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 999; opacity: 0; transition: opacity 0.4s ease; }
@@ -440,7 +634,6 @@ button, a, [role="button"], .btn, .nav-link, .nav-toggle, .chat-option-btn,
     .services { padding: 48px 0; }
     .quote-section { padding: 48px 0; }
     .quote-form { padding: 20px 16px; }
-    .form-success { padding: 28px 16px; }
     .quote-benefits { grid-template-columns: 1fr; gap: 8px; }
     .benefit { font-size: 0.875rem; }
     .partners { padding: 44px 0; }

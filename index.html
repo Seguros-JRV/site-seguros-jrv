@@ -527,13 +527,6 @@
                                 <i class="fas fa-paper-plane"></i> Enviar Cotação
                             </button>
                         </form>
-                        <div class="form-success" id="formSuccess">
-                            <div class="success-icon"><i class="fab fa-whatsapp"></i></div>
-                            <h3>Cotação Enviada via WhatsApp!</h3>
-                            <p>Seus dados foram enviados para nosso WhatsApp e salvos em nossa base. Se a janela não abriu automaticamente, clique abaixo:</p>
-                            <a id="whatsappFallback" href="https://wa.me/5511911400184?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20cota%C3%A7%C3%A3o%20de%20seguro." class="btn btn-primary" target="_blank" rel="noopener noreferrer" style="margin-bottom: 12px;"><i class="fab fa-whatsapp"></i> Abrir WhatsApp</a>
-                            <button type="button" class="btn btn-outline" onclick="resetForm()">Nova Cotação</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -758,6 +751,47 @@
     <a href="https://wa.me/5511911400184?text=Olá! Gostaria de saber mais sobre seguros." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp - (11) 91140-0184">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <!-- ===== MODAL DE CONFIRMAÇÃO — Envio de formulário ===== -->
+    <div class="success-overlay" id="successOverlay" aria-hidden="true">
+        <div class="success-modal" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
+
+            <!-- Botão fechar -->
+            <button class="success-close-btn" id="successCloseBtn" aria-label="Fechar confirmação">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+
+            <!-- Checkmark animado -->
+            <div class="success-icon-wrap" aria-hidden="true">
+                <svg class="success-checkmark" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="success-checkmark__circle" cx="28" cy="28" r="25"/>
+                    <path  class="success-checkmark__check"  d="M16 28 l8 8 l16 -16"/>
+                </svg>
+            </div>
+
+            <!-- Mensagem principal -->
+            <h3 class="success-title" id="successModalTitle">Formulário recebido com sucesso! ✅</h3>
+            <p class="success-subtitle">Em até <strong>10 minutos</strong> nossa equipe<br class="success-br"> entrará em contato com você.</p>
+
+            <!-- Card com dados do lead -->
+            <div class="success-lead-card" id="successLeadCard" aria-live="polite"></div>
+
+            <!-- Ações -->
+            <div class="success-actions">
+                <a class="success-wa-btn" id="successWaBtn"
+                   href="https://wa.me/5511911400184?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20cota%C3%A7%C3%A3o%20de%20seguro."
+                   target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                    Prefere falar agora? WhatsApp
+                </a>
+                <button class="success-new-btn" id="successNewBtn" type="button">
+                    <i class="fas fa-rotate-left" aria-hidden="true"></i>
+                    Fazer nova cotação
+                </button>
+            </div>
+
+        </div>
+    </div>
 
     <script src="script.js" defer></script>
 </body>

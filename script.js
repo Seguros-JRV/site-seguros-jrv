@@ -134,7 +134,6 @@ var GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxVqnBBIUYVafEY
 var WHATSAPP_NUMBER = '5511911400184';
 
 var quoteForm = document.getElementById('quoteForm');
-var formSuccess = document.getElementById('formSuccess');
 
 // Rate limiting: impede envio repetido em menos de 60 segundos
 var ultimoEnvio = 0;
@@ -252,29 +251,113 @@ if (quoteForm) {
         var textoCodificado = encodeURIComponent(textoFinal);
         var urlWhatsApp = 'https://api.whatsapp.com/send/?phone=' + WHATSAPP_NUMBER + '&text=' + textoCodificado + '&type=phone_number&app_absent=0';
 
-        var fallbackLink = document.getElementById('whatsappFallback');
-        if (fallbackLink) fallbackLink.href = urlWhatsApp;
-
+        // Abre modal de confirmação após animação do botão "Enviando..."
         setTimeout(function() {
-            window.open(urlWhatsApp, '_blank');
-            quoteForm.style.display = 'none';
-            formSuccess.classList.add('active');
-        }, 1200);
+            openSuccessModal(nome, selEl.options[selEl.selectedIndex].text, urlWhatsApp);
+            // Reativa botão (formulário permanece visível sob o modal)
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Cotação';
+            btn.disabled = false;
+        }, 900);
     });
 }
 
-// Restaura o formulário ao estado inicial
+// Restaura o formulário ao estado inicial (campos limpos, botão ativo)
 function resetForm() {
     if (!quoteForm) return;
     quoteForm.reset();
-    quoteForm.style.display = 'block';
-    formSuccess.classList.remove('active');
     var btn = document.getElementById('submitBtn');
     if (btn) {
         btn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Cotação';
         btn.disabled = false;
     }
 }
+
+// ===== MODAL DE SUCESSO =====
+
+/**
+ * Abre o modal de confirmação com os dados do lead.
+ * @param {string} nome          - Nome do cliente (texto cru, escapado aqui)
+ * @param {string} tipoSeguroRaw - Texto do option selecionado (ex: "🚗 Seguro Auto")
+ * @param {string} whatsappUrl   - URL completa do WhatsApp com texto pré-preenchido
+ */
+function openSuccessModal(nome, tipoSeguroRaw, whatsappUrl) {
+    var overlay = document.getElementById('successOverlay');
+    if (!overlay) return;
+
+    // Preenche card com dados do lead
+    var leadCard = document.getElementById('successLeadCard');
+    if (leadCard) {
+        var nomeSeguro = escapeHtml(nome);
+        var tipoSeguro = escapeHtml(tipoSeguroRaw);
+        leadCard.innerHTML =
+            '<div class="success-lead-row">' +
+                '<i class="fas fa-user success-lead-icon" aria-hidden="true"></i>' +
+                '<span>Nome: <strong>' + nomeSeguro + '</strong></span>' +
+            '</div>' +
+            '<div class="success-lead-row">' +
+                '<i class="fas fa-shield-halved success-lead-icon" aria-hidden="true"></i>' +
+                '<span>Seguro: <strong>' + tipoSeguro + '</strong></span>' +
+            '</div>';
+    }
+
+    // Atualiza link do WhatsApp no modal
+    var waBtn = document.getElementById('successWaBtn');
+    if (waBtn && whatsappUrl) waBtn.href = whatsappUrl;
+
+    // Reinicia animações SVG (para múltiplas aberturas funcionarem)
+    overlay.querySelectorAll('.success-checkmark__circle, .success-checkmark__check').forEach(function(el) {
+        el.style.animation = 'none';
+        void el.getBoundingClientRect(); // força reflow sem causar layout thrash
+        el.style.animation = '';
+    });
+
+    // Exibe o modal
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('body-menu-open'); // bloqueia scroll da página
+
+    // Foca no botão fechar para acessibilidade
+    var closeBtn = document.getElementById('successCloseBtn');
+    if (closeBtn) setTimeout(function() { closeBtn.focus(); }, 50);
+}
+
+/**
+ * Fecha o modal de sucesso.
+ * @param {boolean} andReset - Se true, também reseta o formulário
+ */
+function closeSuccessModal(andReset) {
+    var overlay = document.getElementById('successOverlay');
+    if (!overlay) return;
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('body-menu-open');
+    if (andReset) resetForm();
+}
+
+// Event listeners do modal
+(function() {
+    var overlay  = document.getElementById('successOverlay');
+    var closeBtn = document.getElementById('successCloseBtn');
+    var newBtn   = document.getElementById('successNewBtn');
+
+    // Fecha ao clicar no X
+    if (closeBtn) closeBtn.addEventListener('click', function() { closeSuccessModal(false); });
+
+    // "Nova cotação" reseta o form e fecha o modal
+    if (newBtn) newBtn.addEventListener('click', function() { closeSuccessModal(true); });
+
+    // Fecha ao clicar no backdrop (fora do card)
+    if (overlay) overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeSuccessModal(false);
+    });
+
+    // Fecha com Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay && overlay.classList.contains('active')) {
+            closeSuccessModal(false);
+        }
+    });
+})();
 
 // ===== CHATBOT INTELIGENTE =====
 const chatbotToggle = document.getElementById('chatbotToggle');
