@@ -239,6 +239,19 @@ img.partner-logo-img { width: 90px; height: 50px; max-width: 90px; max-height: 5
 .nav-overlay.active { display: block; opacity: 1; }
 .body-menu-open { overflow: hidden; }
 
+/* ===== SEGURANÇA — Honeypot anti-spam ===== */
+/* O campo honeypot é invisível para humanos, mas bots o preenchem */
+.hp-field {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
 /* ===== PREMIUM UX ENHANCEMENTS ===== */
 
 /* Scrollbar personalizado */

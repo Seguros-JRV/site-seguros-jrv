@@ -91,6 +91,44 @@ if (telefoneInput) {
     });
 }
 
+// ===== SEGURANÇA — Utilitários =====
+
+/**
+ * Escapa caracteres HTML especiais para prevenir XSS.
+ * Usado sempre que texto do usuário é inserido no DOM via innerHTML.
+ */
+function escapeHtml(str) {
+    if (typeof str !== 'string') return '';
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
+/**
+ * Sanitiza strings removendo caracteres de controle e limitando tamanho.
+ * Não altera texto normal — apenas bloqueia injeções.
+ */
+function sanitizeText(str, maxLen) {
+    if (typeof str !== 'string') return '';
+    // Remove caracteres de controle (exceto newlines) e normaliza espaços
+    return str.replace(/[^\S\n\r]/g, ' ').replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '').slice(0, maxLen || 1000).trim();
+}
+
+/**
+ * Valida formato de telefone brasileiro: (XX) XXXXX-XXXX ou (XX) XXXX-XXXX
+ */
+function validarTelefone(tel) {
+    return /^\(\d{2}\)\s\d{4,5}-\d{4}$/.test(tel);
+}
+
+/**
+ * Valida formato de e-mail (básico, complementa o atributo type="email")
+ */
+function validarEmail(email) {
+    if (!email) return true; // Campo opcional
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) && email.length <= 150;
+}
+
 // ===== FORM SUBMIT → GOOGLE SHEETS + WHATSAPP =====
 var GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxVqnBBIUYVafEYw3x-R5bRdXvLojbY2IawF10NSrUdr097sRyTkLhJK5MGi_-rcusB/exec';
 var WHATSAPP_NUMBER = '5511911400184';
@@ -98,10 +136,14 @@ var WHATSAPP_NUMBER = '5511911400184';
 var quoteForm = document.getElementById('quoteForm');
 var formSuccess = document.getElementById('formSuccess');
 
+// Rate limiting: impede envio repetido em menos de 60 segundos
+var ultimoEnvio = 0;
+var COOLDOWN_MS = 60000; // 60 segundos entre envios
+
 /**
  * Envia os dados do formulário para o Google Sheets via Apps Script.
  * Usa fetch com mode 'no-cors' para evitar problemas de CORS.
- * @param {Object} dados - Objeto com os campos do formulário
+ * @param {Object} dados - Objeto com os campos do formulário (já sanitizados)
  */
 async function enviarParaGoogleSheets(dados) {
     if (!GOOGLE_SHEETS_URL) {
@@ -117,7 +159,8 @@ async function enviarParaGoogleSheets(dados) {
         });
         console.log('[Seguros JRV] Dados enviados para Google Sheets com sucesso.');
     } catch (erro) {
-        console.error('[Seguros JRV] Erro ao enviar para Google Sheets:', erro);
+        // Não expõe detalhes do erro para o usuário — apenas log interno
+        console.error('[Seguros JRV] Falha ao enviar para Google Sheets.');
     }
 }
 
@@ -125,28 +168,70 @@ if (quoteForm) {
     quoteForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        var nome     = document.getElementById('nome').value.trim();
-        var telefone = document.getElementById('telefone').value.trim();
-        var email    = document.getElementById('email').value.trim();
-        var selEl    = document.getElementById('tipoSeguro');
-        var tipoSeguro = selEl.options[selEl.selectedIndex].text;
-        var mensagem = document.getElementById('mensagem').value.trim();
+        // ── 1. HONEYPOT: bots preenchem o campo oculto; humanos não ──
+        var honeypot = document.getElementById('website_url');
+        if (honeypot && honeypot.value.trim() !== '') {
+            console.warn('[Seguros JRV] Submissão de bot detectada e bloqueada.');
+            return; // Falha silenciosa para não alertar o bot
+        }
 
+        // ── 2. RATE LIMITING: máx. 1 envio por minuto ──
+        var agora = Date.now();
+        if (agora - ultimoEnvio < COOLDOWN_MS) {
+            var segundos = Math.ceil((COOLDOWN_MS - (agora - ultimoEnvio)) / 1000);
+            alert('Por favor, aguarde ' + segundos + ' segundo(s) antes de enviar outra cotação.');
+            return;
+        }
+
+        // ── 3. COLETA E SANITIZAÇÃO DOS DADOS ──
+        var nome     = sanitizeText(document.getElementById('nome').value, 100);
+        var telefone = sanitizeText(document.getElementById('telefone').value, 15);
+        var email    = sanitizeText(document.getElementById('email').value, 150);
+        var selEl    = document.getElementById('tipoSeguro');
+        var tipoSeguroVal = selEl.value; // valor controlado pelo próprio select
+        var tipoSeguroText = escapeHtml(selEl.options[selEl.selectedIndex].text);
+        var mensagem = sanitizeText(document.getElementById('mensagem').value, 1000);
+
+        // ── 4. VALIDAÇÕES EXTRAS ──
+        if (!nome || nome.length < 2) {
+            alert('Por favor, informe seu nome completo.');
+            document.getElementById('nome').focus();
+            return;
+        }
+        if (!validarTelefone(telefone)) {
+            alert('Por favor, informe um telefone válido no formato (XX) XXXXX-XXXX.');
+            document.getElementById('telefone').focus();
+            return;
+        }
+        if (!validarEmail(email)) {
+            alert('Por favor, informe um e-mail válido.');
+            document.getElementById('email').focus();
+            return;
+        }
+        var valoresPermitidos = ['auto','vida','saude','residencial','empresarial','viagem','outro'];
+        if (!valoresPermitidos.includes(tipoSeguroVal)) {
+            alert('Por favor, selecione o tipo de seguro.');
+            document.getElementById('tipoSeguro').focus();
+            return;
+        }
+
+        // ── 5. BLOQUEIA BOTÃO E REGISTRA TIMESTAMP ──
+        ultimoEnvio = agora;
         var btn = document.getElementById('submitBtn');
         btn.innerHTML = '<i class="fab fa-whatsapp fa-spin"></i> Enviando...';
         btn.disabled = true;
 
-        // Envia para Google Sheets (assíncrono, não bloqueia o fluxo)
+        // ── 6. ENVIO PARA GOOGLE SHEETS (assíncrono, não bloqueia o fluxo) ──
         enviarParaGoogleSheets({
             nome: nome,
             telefone: telefone,
             email: email,
-            tipoSeguro: tipoSeguro,
+            tipoSeguro: tipoSeguroText,
             mensagem: mensagem,
             dataHora: new Date().toLocaleString('pt-BR')
         });
 
-        // Monta mensagem para WhatsApp
+        // ── 7. MONTA MENSAGEM PARA WHATSAPP ──
         var linhas = [];
         linhas.push('Olá! Solicitei uma *cotação de seguro* pelo site da Seguros JRV.');
         linhas.push('');
@@ -155,7 +240,7 @@ if (quoteForm) {
         linhas.push('*Nome:* ' + nome);
         linhas.push('*Telefone:* ' + telefone);
         if (email) linhas.push('*E-mail:* ' + email);
-        linhas.push('*Tipo de Seguro:* ' + tipoSeguro);
+        linhas.push('*Tipo de Seguro:* ' + tipoSeguroText);
         if (mensagem) {
             linhas.push('');
             linhas.push('*Mensagem:* ' + mensagem);
@@ -180,12 +265,15 @@ if (quoteForm) {
 
 // Restaura o formulário ao estado inicial
 function resetForm() {
+    if (!quoteForm) return;
     quoteForm.reset();
     quoteForm.style.display = 'block';
     formSuccess.classList.remove('active');
     var btn = document.getElementById('submitBtn');
-    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Cotação';
-    btn.disabled = false;
+    if (btn) {
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Cotação';
+        btn.disabled = false;
+    }
 }
 
 // ===== CHATBOT INTELIGENTE =====
@@ -239,7 +327,10 @@ function getTimestamp() {
 function addMessage(text, type) {
     const div = document.createElement('div');
     div.className = `chat-msg ${type}`;
-    div.innerHTML = `<p>${text}</p><span class="msg-time">${getTimestamp()}</span>`;
+    // Mensagens do usuário são escapadas para prevenir XSS.
+    // Mensagens do bot são HTML confiável (definido no código interno).
+    const safeContent = type === 'user' ? escapeHtml(text) : text;
+    div.innerHTML = `<p>${safeContent}</p><span class="msg-time">${getTimestamp()}</span>`;
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
     saveChatState();
@@ -299,7 +390,10 @@ chatSend.addEventListener('click', sendUserMessage);
 chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendUserMessage(); });
 
 function sendUserMessage() {
-    const text = chatInput.value.trim();
+    const rawText = chatInput.value.trim();
+    if (!rawText) return;
+    // Sanitiza e limita tamanho antes de processar
+    const text = sanitizeText(rawText, 500);
     if (!text) return;
     addMessage(text, 'user');
     chatInput.value = '';

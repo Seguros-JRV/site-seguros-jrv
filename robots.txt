@@ -1,6 +1,23 @@
 # Seguros JRV — robots.txt
+# https://segurosjrv.com.br
+
+# Permitir todos os bots legítimos
 User-agent: *
 Allow: /
+Crawl-delay: 10
+
+# Bloquear scrapers e bots maliciosos conhecidos
+User-agent: AhrefsBot
+Crawl-delay: 60
+
+User-agent: SemrushBot
+Crawl-delay: 60
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
 
 # Sitemap
 Sitemap: https://segurosjrv.com.br/sitemap.xml
