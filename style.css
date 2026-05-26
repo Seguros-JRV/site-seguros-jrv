@@ -42,6 +42,7 @@ a { text-decoration: none; color: inherit; }
 .nav-link:hover, .nav-link.active { color: var(--accent); background: rgba(212,160,23,0.1); }
 .nav-cta { display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; background: var(--green); color: #fff; border-radius: 50px; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; }
 .nav-cta:hover { background: var(--green-dark); transform: translateY(-2px); }
+.mobile-cta-item { display: none; }
 .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
 .nav-toggle span { width: 24px; height: 2px; background: var(--text); transition: 0.3s; border-radius: 2px; }
 
@@ -263,6 +264,7 @@ img.partner-logo-img { width: 90px; height: 50px; max-width: 90px; max-height: 5
 @media (max-width: 768px) {
     .nav-menu { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: rgba(6,14,26,0.98); backdrop-filter: blur(20px); flex-direction: column; padding: 100px 40px 40px; transition: right 0.4s ease; z-index: 1001; }
     .nav-menu.active { right: 0; }
+    .mobile-cta-item { display: list-item; }
     .nav-cta.mobile-cta { display: inline-flex; margin-top: 20px; }
     .nav-toggle { display: flex; padding: 12px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
     .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
