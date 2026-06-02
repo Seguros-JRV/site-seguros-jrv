@@ -15,3 +15,9 @@ desktop.ini
 .idea/
 *.swp
 *.swo
+
+# Claude Code (config local de preview)
+.claude/
+
+# Arquivos soltos não usados no site
+LOGO JRV.jpeg
